@@ -153,6 +153,57 @@
     .wordmark{ text-align: left; }
   }
 
+  /* ---------- Mobile drawer ---------- */
+  .drawer{
+    position: fixed; inset: 0;
+    background: var(--bone);
+    z-index: 50;
+    padding: clamp(2rem, 6vw, 4rem);
+    display: flex; flex-direction: column; gap: 2rem;
+    transform: translateY(-100%);
+    transition: transform .28s ease;
+    visibility: hidden;
+  }
+  .drawer[data-open="true"]{ transform: translateY(0); visibility: visible; }
+  .drawer__top{
+    display: flex; justify-content: space-between; align-items: center;
+    padding-bottom: 1.6rem;
+    border-bottom: 1px solid var(--ink-15);
+  }
+  .drawer__mark{
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+  .drawer__close{
+    background: none; border: 0; padding: .4rem 0; font: inherit;
+    color: inherit; cursor: pointer;
+    font-size: 1.15rem; letter-spacing: 0.18em; text-transform: uppercase;
+  }
+  .drawer__primary{ list-style: none; padding: 0; margin: 0; display: grid; gap: 1.4rem; }
+  .drawer__primary a{
+    font-family: var(--font-display);
+    font-size: clamp(4.4rem, 14vw, 8rem);
+    line-height: .95;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+  .drawer__primary a.active{ color: var(--accent); }
+  .drawer__utility{
+    list-style: none; padding: 2.4rem 0 0; margin: auto 0 0;
+    border-top: 1px solid var(--ink-15);
+    display: grid; gap: 1.2rem;
+  }
+  .drawer__utility a{
+    font-family: var(--font-mono);
+    font-size: 1.25rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+  @media (min-width: 861px){ .drawer{ display: none; } }
+  body.drawer-open{ overflow: hidden; }
+
   /* ---------- Hero ---------- */
   .hero{
     padding-block: clamp(4rem, 8vw, 8rem) clamp(5rem, 10vw, 10rem);
@@ -558,7 +609,7 @@
       <a href="#locations">Visit</a>
     </nav>
 
-    <button class="menu-toggle" aria-expanded="false" aria-controls="mobile-nav">Menu</button>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="drawer">Menu</button>
 
     <a class="wordmark" href="/" aria-label="Reverence Coffee — Home">
       Reverence
@@ -572,6 +623,23 @@
     </nav>
   </div>
 </header>
+
+<aside class="drawer" id="drawer" aria-hidden="true" aria-label="Mobile navigation">
+  <div class="drawer__top">
+    <span class="drawer__mark">Reverence</span>
+    <button class="drawer__close" type="button">Close</button>
+  </div>
+  <ul class="drawer__primary">
+    <li><a href="menu.html">Menu</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="#locations">Visit</a></li>
+  </ul>
+  <ul class="drawer__utility">
+    <li><a href="#rewards">Rewards</a></li>
+    <li><a href="https://www.toasttab.com/reverence-coffee-east-peoria/giftcards" target="_blank" rel="noreferrer">Gift cards</a></li>
+    <li><a href="https://www.toasttab.com/reverence-coffee-east-peoria" target="_blank" rel="noreferrer">Order online</a></li>
+  </ul>
+</aside>
 
 <main id="main">
 
@@ -791,6 +859,30 @@
     <span>Site brewed at 203°F</span>
   </div>
 </footer>
+
+<script>
+  (function(){
+    const toggle = document.querySelector('.menu-toggle');
+    const drawer = document.getElementById('drawer');
+    if (!toggle || !drawer) return;
+    const closeBtn = drawer.querySelector('.drawer__close');
+    const links = drawer.querySelectorAll('a');
+
+    function setOpen(open){
+      drawer.dataset.open = open ? 'true' : 'false';
+      drawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      document.body.classList.toggle('drawer-open', open);
+    }
+
+    toggle.addEventListener('click', () => setOpen(drawer.dataset.open !== 'true'));
+    closeBtn.addEventListener('click', () => setOpen(false));
+    links.forEach(a => a.addEventListener('click', () => setOpen(false)));
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && drawer.dataset.open === 'true') setOpen(false);
+    });
+  })();
+</script>
 
 </body>
 </html>

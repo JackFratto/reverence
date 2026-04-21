@@ -1,0 +1,683 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Menu — Reverence Coffee</title>
+<meta name="description" content="Official menu for Reverence Coffee, East Peoria. Specialty coffee, tea, food, catering, and whole-bean retail.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unica+One&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bone: #EFE9DB;
+    --bone-soft: #E5DECD;
+    --ink: #141414;
+    --ink-60: rgba(20,20,20,.60);
+    --ink-40: rgba(20,20,20,.40);
+    --ink-15: rgba(20,20,20,.15);
+    --accent: #394409;
+    --accent-hover: #4a5710;
+
+    --font-display: "Unica One", "Arial Narrow", sans-serif;
+    --font-mono: "SF Mono", Menlo, Consolas, Monaco, "Liberation Mono", monospace;
+
+    --page-max: 1280px;
+    --gutter: clamp(1.5rem, 4vw, 4rem);
+  }
+
+  *,*::before,*::after{ box-sizing: border-box; }
+
+  html{ font-size: 62.5%; scroll-behavior: smooth; }
+
+  body{
+    margin: 0;
+    background: var(--bone);
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-size: 1.4rem;
+    line-height: 1.65;
+    letter-spacing: 0.02em;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  @media (min-width: 750px){ body{ font-size: 1.5rem; } }
+
+  a{ color: inherit; text-decoration: none; }
+  a:hover{ color: var(--accent); }
+
+  img{ display: block; max-width: 100%; height: auto; }
+
+  h1,h2,h3,h4{
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    line-height: 1.05;
+    margin: 0;
+  }
+
+  .page{ max-width: var(--page-max); margin: 0 auto; padding-inline: var(--gutter); }
+
+  .skip{ position: absolute; left:-9999px; top:0; background: var(--ink); color: var(--bone); padding: .8rem 1.2rem; z-index: 100; }
+  .skip:focus{ left:1rem; top:1rem; }
+
+  /* Announcement */
+  .marquee{
+    background: var(--ink); color: var(--bone);
+    font-size: 1.15rem; letter-spacing: 0.16em; text-transform: uppercase;
+    padding: .9rem var(--gutter); text-align: center;
+  }
+  .marquee a{ border-bottom: 1px solid rgba(239,233,219,.4); padding-bottom: 2px; }
+  .marquee a:hover{ color: var(--bone); border-color: var(--bone); }
+
+  /* Header */
+  .site-header{ position: sticky; top:0; z-index: 20; background: var(--bone); border-bottom: 1px solid var(--ink-15); }
+  .site-header .page{
+    display: grid; grid-template-columns: 1fr auto 1fr; align-items:center;
+    padding-block: 2rem; gap: 2rem;
+  }
+  .nav-primary, .nav-utility{
+    display: flex; gap: 2.4rem; font-size: 1.15rem;
+    letter-spacing: 0.18em; text-transform: uppercase;
+  }
+  .nav-primary{ justify-content: flex-start; }
+  .nav-utility{ justify-content: flex-end; }
+  .nav-primary a, .nav-utility a{ position: relative; padding-bottom: 2px; }
+  .nav-primary a.active, .nav-utility a.active{ color: var(--accent); }
+  .nav-primary a::after, .nav-utility a::after{
+    content:""; position:absolute; left:0; right:0; bottom:0; height:1px;
+    background: currentColor; transform: scaleX(0); transform-origin: left;
+    transition: transform .2s ease;
+  }
+  .nav-primary a:hover::after, .nav-utility a:hover::after,
+  .nav-primary a.active::after, .nav-utility a.active::after{ transform: scaleX(1); }
+
+  .wordmark{
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 2.4vw, 2.6rem);
+    letter-spacing: 0.22em; text-align:center; text-transform: uppercase;
+  }
+  .wordmark small{
+    display: block; font-family: var(--font-mono); font-size: 1rem;
+    letter-spacing: 0.4em; margin-top: .4rem; color: var(--ink-60);
+    text-transform: uppercase;
+  }
+  .menu-toggle{ display:none; background:none; border:0; padding:0; font:inherit;
+    color:inherit; cursor:pointer; text-transform:uppercase; letter-spacing:.18em; font-size:1.15rem; }
+  @media (max-width: 860px){
+    .site-header .page{ grid-template-columns: auto 1fr auto; }
+    .nav-primary, .nav-utility{ display:none; }
+    .menu-toggle{ display:inline-block; }
+    .wordmark{ text-align:left; }
+  }
+
+  /* Page hero */
+  .menu-hero{
+    display: grid; grid-template-columns: 1fr;
+    border-bottom: 1px solid var(--ink-15);
+  }
+  @media (min-width: 900px){ .menu-hero{ grid-template-columns: .9fr 1.1fr; } }
+  .menu-hero__text{
+    padding: clamp(4rem, 7vw, 8rem) var(--gutter);
+    display: flex; flex-direction: column; justify-content: center;
+    max-width: var(--page-max); margin: 0 auto; width: 100%;
+  }
+  .eyebrow{
+    font-size: 1.1rem; letter-spacing: 0.32em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 2rem;
+    display: inline-flex; align-items: center; gap: 1rem;
+  }
+  .eyebrow::before{ content:""; width: 2.4rem; height: 1px; background: var(--accent); }
+  .menu-hero h1{
+    font-size: clamp(5.6rem, 10vw, 12rem); line-height: .95;
+  }
+  .menu-hero .sub{
+    margin-top: 2.4rem; color: var(--ink-60); max-width: 46ch; font-size: 1.6rem;
+  }
+  .menu-hero__media{
+    position: relative; min-height: 40rem;
+    background: var(--ink); overflow: hidden;
+    border-left: 1px solid var(--ink-15);
+  }
+  .menu-hero__media img{ width:100%; height:100%; object-fit: cover; position:absolute; inset:0; }
+  .menu-hero__media .caption{
+    position: absolute; bottom: 1.6rem; left: 1.6rem;
+    background: var(--bone); color: var(--ink);
+    padding: .6rem 1rem; font-size: 1rem;
+    letter-spacing: 0.24em; text-transform: uppercase;
+  }
+
+  /* Sticky group nav */
+  .group-nav{
+    position: sticky; top: 80px; z-index: 10;
+    background: var(--bone);
+    border-bottom: 1px solid var(--ink-15);
+  }
+  .group-nav__inner{
+    display: flex; gap: 2.4rem; overflow-x: auto;
+    padding: 1.6rem 0;
+    font-size: 1.1rem; letter-spacing: 0.22em; text-transform: uppercase;
+    scrollbar-width: thin;
+  }
+  .group-nav a{
+    white-space: nowrap; padding: .4rem 0; position: relative;
+    color: var(--ink-60);
+  }
+  .group-nav a:hover,
+  .group-nav a.active{ color: var(--ink); }
+  .group-nav a.active::after{
+    content:""; position:absolute; left:0; right:0; bottom:-1.7rem;
+    height: 2px; background: var(--accent);
+  }
+
+  /* Menu sections */
+  .menu-section{
+    padding-block: clamp(5rem, 8vw, 9rem);
+    border-bottom: 1px solid var(--ink-15);
+  }
+  .menu-section__head{
+    display: grid; grid-template-columns: 1fr;
+    gap: 1.6rem; align-items: end;
+    margin-bottom: clamp(3rem, 5vw, 5rem);
+  }
+  @media (min-width: 900px){
+    .menu-section__head{ grid-template-columns: 1fr auto; gap: 3rem; }
+  }
+  .menu-section__head h2{
+    font-size: clamp(4.4rem, 7vw, 8rem);
+  }
+  .menu-section__head .meta{
+    font-size: 1.1rem; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--ink-60);
+    justify-self: end;
+  }
+  .menu-section p.desc{
+    color: var(--ink-60); max-width: 60ch; margin-top: -1rem;
+    margin-bottom: 3rem;
+  }
+
+  /* Items grid */
+  .items{
+    display: grid; grid-template-columns: 1fr;
+    gap: 0;
+    border-top: 1px solid var(--ink);
+  }
+  @media (min-width: 860px){
+    .items.two{ grid-template-columns: 1fr 1fr; column-gap: clamp(3rem, 5vw, 6rem); }
+  }
+
+  .item{
+    padding: 2.4rem 0;
+    border-bottom: 1px solid var(--ink-15);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: .4rem 2rem;
+    align-items: baseline;
+  }
+  .item h3{
+    font-family: var(--font-mono);
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    font-size: 1.6rem;
+    line-height: 1.3;
+    margin: 0;
+  }
+  .item .dots{
+    flex: 1 1 auto; border-bottom: 1px dotted var(--ink-40);
+    height: 1em; margin: 0 .4rem; align-self: end;
+  }
+  .item .price{
+    font-family: var(--font-mono);
+    font-size: 1.3rem;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    color: var(--ink);
+  }
+  .item p{
+    grid-column: 1 / -1;
+    color: var(--ink-60); font-size: 1.25rem; line-height: 1.55;
+    margin: .4rem 0 0; max-width: 52ch;
+  }
+  .item .tag{
+    display: inline-block;
+    font-size: .95rem; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--accent);
+    margin-right: .8rem;
+  }
+
+  /* Featured item card (with image) */
+  .featured{
+    display: grid; gap: clamp(2rem, 3vw, 4rem);
+    grid-template-columns: 1fr;
+    align-items: center;
+    padding: clamp(3rem, 4vw, 5rem);
+    background: var(--bone-soft);
+    margin-bottom: clamp(4rem, 6vw, 6rem);
+  }
+  @media (min-width: 860px){
+    .featured{ grid-template-columns: .9fr 1.1fr; }
+  }
+  .featured .media{
+    aspect-ratio: 4/5; background: var(--ink); overflow: hidden;
+  }
+  .featured .media img{ width:100%; height:100%; object-fit: cover; }
+  .featured h3{
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: clamp(3.6rem, 5vw, 5.4rem);
+    line-height: 1;
+    margin-bottom: 1.6rem;
+  }
+  .featured p{ color: var(--ink-60); max-width: 48ch; margin: 0 0 2rem; }
+  .featured .price{
+    font-size: 1.6rem; letter-spacing: 0.1em;
+    display: inline-block; margin-right: 2rem;
+  }
+
+  /* Buttons */
+  .btn{
+    display: inline-flex; align-items:center; gap: .8rem;
+    padding: 1.2rem 2rem;
+    font-family: var(--font-mono);
+    font-size: 1.15rem; letter-spacing: 0.22em; text-transform: uppercase;
+    border: 1px solid var(--ink);
+    background: var(--ink); color: var(--bone);
+    cursor: pointer;
+    transition: background .15s, color .15s, border-color .15s;
+  }
+  .btn:hover{ background: var(--accent); border-color: var(--accent); color: var(--bone); }
+  .btn--ghost{ background: transparent; color: var(--ink); }
+  .btn--ghost:hover{ background: var(--ink); color: var(--bone); }
+
+  /* Footer */
+  footer.site-footer{
+    background: var(--ink); color: var(--bone);
+    padding-block: clamp(5rem, 8vw, 8rem) 2rem;
+  }
+  .footer-grid{ display: grid; gap: 4rem; grid-template-columns: 1fr; }
+  @media (min-width: 860px){
+    .footer-grid{ grid-template-columns: 2fr 1fr 1fr 1fr; }
+  }
+  .site-footer h4{
+    font-size: 1.1rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: rgba(239,233,219,.6); margin-bottom: 1.8rem;
+    font-family: var(--font-mono); font-weight: 400;
+  }
+  .site-footer ul{ list-style: none; padding:0; margin:0; display: grid; gap: .8rem; }
+  .site-footer a:hover{ color: var(--accent); }
+  .footer-logo{
+    font-family: var(--font-display); font-size: 3.2rem;
+    letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 2rem;
+  }
+  .footer-logo + p{ color: rgba(239,233,219,.7); max-width: 38ch; }
+  .colophon{
+    margin-top: 6rem; padding-top: 2rem;
+    border-top: 1px solid rgba(239,233,219,.18);
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1.6rem;
+    font-size: 1.05rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(239,233,219,.55);
+  }
+
+  /* Utility */
+  .disclaimer{ font-size: 1.05rem; color: var(--ink-60); margin-top: 1.6rem; }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="marquee">
+  Order online for pickup at 409 Richland <span aria-hidden="true">•</span>
+  <a href="https://www.toasttab.com/reverence-coffee-east-peoria" target="_blank" rel="noreferrer">Start an order &rarr;</a>
+</div>
+
+<header class="site-header">
+  <div class="page">
+    <nav class="nav-primary" aria-label="Primary">
+      <a class="active" href="menu.html">Menu</a>
+      <a href="about.html">About</a>
+      <a href="index.html#locations">Visit</a>
+    </nav>
+    <button class="menu-toggle" aria-expanded="false">Menu</button>
+    <a class="wordmark" href="index.html" aria-label="Reverence Coffee — Home">
+      Reverence
+      <small>Coffee Co. · EST.</small>
+    </a>
+    <nav class="nav-utility" aria-label="Utility">
+      <a href="index.html#rewards">Rewards</a>
+      <a href="https://www.toasttab.com/reverence-coffee-east-peoria/giftcards" target="_blank" rel="noreferrer">Gift cards</a>
+      <a href="https://www.toasttab.com/reverence-coffee-east-peoria" target="_blank" rel="noreferrer">Order</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- Hero -->
+  <section class="menu-hero">
+    <div class="menu-hero__text">
+      <span class="eyebrow">Menu — East Peoria</span>
+      <h1>The menu,<br>honestly</h1>
+      <p class="sub">
+        Curated specialty coffee, house-made syrups, and a short food program —
+        pulled, poured, and plated with intention. Prices start at the
+        smallest size; modifiers may add.
+      </p>
+    </div>
+    <div class="menu-hero__media">
+      <img alt="Ube Amore hot latte"
+           src="https://d1w7312wesee68.cloudfront.net/t2gE9bvBXkwhHId_bB1aOx3mZFfRkL5XrmfSaxheNdE/ext:webp/quality:85/preset:large/c:1920:1616:ce:0:131/plain/s3://toast-sites-resources-prod/restaurantImages/838ef918-5aeb-46be-bcfa-4b8ad487bc4a/ubeamorehotlatte.jpg">
+      <span class="caption">Ube Amore · Signature</span>
+    </div>
+  </section>
+
+  <!-- Group nav -->
+  <div class="group-nav">
+    <div class="page">
+      <div class="group-nav__inner" id="groupNav">
+        <a href="#lattes" class="active">Lattes</a>
+        <a href="#coffee">Coffee</a>
+        <a href="#beverages">Beverages</a>
+        <a href="#food">Food</a>
+        <a href="#catering">Catering</a>
+        <a href="#beans">Whole Bean</a>
+        <a href="#retail">Retail</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- LATTES -->
+  <section class="menu-section" id="lattes">
+    <div class="page">
+      <header class="menu-section__head">
+        <h2>Lattes</h2>
+        <span class="meta">House-made syrups · Espresso + milk</span>
+      </header>
+
+      <!-- Featured: The Kyle -->
+      <article class="featured">
+        <figure class="media">
+          <img alt="The Kyle — half maple, half caramel latte"
+               src="https://d1w7312wesee68.cloudfront.net/CpeepQUpaxn9ZPjYiDWT_RHSGTdnDpt72iPY6Ha2I/ext:webp/quality:85/preset:large/plain/s3://toasttab/restaurants/restaurant-190743000000000000/menu/items/0/item-1100000012284783710_1764700708.jpg"
+               onerror="this.onerror=null;this.src='https://d1w7312wesee68.cloudfront.net/zBVXWNoN43qvfGDQcDd2dSYZ4wFt8oalZNcpRPxVH6c/ext:webp/quality:85/preset:xl/plain/s3://toasttab/restaurants/restaurant-190743000000000000/menu/items/0/item-1100000012284783710_1764700708.jpg';">
+        </figure>
+        <div>
+          <span class="tag">Signature · No. 01</span>
+          <h3>The Kyle</h3>
+          <p>
+            Kyle's go-to concoction: a half maple, half caramel latte with a pinch
+            of sea salt and cinnamon. Iced? He recommends adding vanilla cold foam.
+          </p>
+          <span class="price">$6.25+</span>
+          <a class="btn" href="https://www.toasttab.com/reverence-coffee-east-peoria" target="_blank" rel="noreferrer">Order now</a>
+        </div>
+      </article>
+
+      <div class="items two">
+        <div class="item"><h3>Latte (Plain)</h3><span class="price">$5.50+</span></div>
+        <div class="item"><h3>Vanilla Latte</h3><span class="price">$5.85+</span>
+          <p>House-made syrup.</p></div>
+        <div class="item"><h3>Caramel Latte</h3><span class="price">$5.85+</span></div>
+        <div class="item"><h3>Honey Latte</h3><span class="price">$5.85+</span></div>
+        <div class="item"><h3>Miel Latte</h3><span class="price">$5.85+</span>
+          <p>Honey &amp; cinnamon.</p></div>
+        <div class="item"><h3>Maple Latte</h3><span class="price">$5.85+</span></div>
+        <div class="item"><h3>Brown Sugar Latte</h3><span class="price">$5.85+</span></div>
+        <div class="item"><h3>Mocha Latte</h3><span class="price">$5.85+</span></div>
+        <div class="item"><h3>Not-a-Machiatto</h3><span class="price">$6.25+</span>
+          <p>Caramel, vanilla latte. For a real treat, try it breve.</p></div>
+        <div class="item"><h3>Ube Latte</h3><span class="price">$7.25+</span>
+          <p>Ube with orange and vanilla, topped with an orange twist. Best over ice.</p></div>
+        <div class="item"><h3>Ube Amore Latte</h3><span class="price">$7.25+</span>
+          <p>Our Ube Latte with added notes of cherry. Contains almonds.</p></div>
+        <div class="item"><h3>Peach Thai Basil Latte</h3><span class="price">$7.25+</span>
+          <p>House-made syrup: sweet, bright, savory. Aromatic lemon bitters.</p></div>
+        <div class="item"><h3>Pistachio Saffron Latte</h3><span class="price">$7.25+</span>
+          <p>House-made syrup — nutty pistachio with warm florals from saffron &amp; vanilla.</p></div>
+        <div class="item"><h3>Kid's "Latte" <em style="color:var(--ink-40); font-style:normal; font-size:1.1rem; letter-spacing:.12em;">8oz, to-go only</em></h3><span class="price">$2.75</span>
+          <p>Steamed milk with a flavor. Can make iced or cold.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COFFEE -->
+  <section class="menu-section" id="coffee">
+    <div class="page">
+      <header class="menu-section__head">
+        <h2>Coffee</h2>
+        <span class="meta">Drip · Espresso · Tonics</span>
+      </header>
+      <div class="items two">
+        <div class="item"><h3>Drip Coffee</h3><span class="price">$3.50+</span></div>
+        <div class="item"><h3>Espresso</h3><span class="price">$3.50</span></div>
+        <div class="item"><h3>Americano</h3><span class="price">$3.75+</span></div>
+        <div class="item"><h3>Cold Brew</h3><span class="price">$5.00+</span>
+          <p>Try our cold brew lemonade — add caffeine to the lemonade in Beverages.</p></div>
+        <div class="item"><h3>Cortado <em style="color:var(--ink-40); font-style:normal; font-size:1.1rem; letter-spacing:.12em;">4oz</em></h3><span class="price">$4.50</span></div>
+        <div class="item"><h3>Cappuccino <em style="color:var(--ink-40); font-style:normal; font-size:1.1rem; letter-spacing:.12em;">6oz</em></h3><span class="price">$5.50</span></div>
+        <div class="item"><h3>Peach Thai Basil Espresso Tonic</h3><span class="price">$6.50+</span>
+          <p>House-made syrup — sweet, bright, savory notes with aromatic lemon bitters.</p></div>
+        <div class="item"><h3>Yuzu Blueberry Espresso Tonic</h3><span class="price">$6.50+</span>
+          <p>House-made syrup — citric acidity, blueberry sweetness, a pop of cucumber.</p></div>
+        <div class="item"><h3>Pistachio Saffron Espresso Tonic</h3><span class="price">$6.50+</span>
+          <p>House-made Pistachio Saffron syrup with espresso and tonic.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEVERAGES -->
+  <section class="menu-section" id="beverages">
+    <div class="page">
+      <header class="menu-section__head">
+        <h2>Beverages</h2>
+        <span class="meta">Tea · Matcha · For the kids</span>
+      </header>
+      <div class="items two">
+        <div class="item"><h3>Chai Latte</h3><span class="price">$5.00+</span></div>
+        <div class="item"><h3>Matcha Latte</h3><span class="price">$5.50+</span></div>
+        <div class="item"><h3>London Fog</h3><span class="price">$5.50+</span>
+          <p>Earl Grey tea latte with vanilla.</p></div>
+        <div class="item"><h3>Hot Chocolate</h3><span class="price">$3.00+</span></div>
+        <div class="item"><h3>Hot Tea <em style="color:var(--ink-40); font-style:normal; font-size:1.1rem; letter-spacing:.12em;">12oz only</em></h3><span class="price">$3.50</span></div>
+        <div class="item"><h3>Matcha Tea</h3><span class="price">$3.00+</span></div>
+        <div class="item"><h3>Iced Tea</h3><span class="price">$4.00+</span></div>
+        <div class="item"><h3>Kombucha <em style="color:var(--ink-40); font-style:normal; font-size:1.1rem; letter-spacing:.12em;">12oz can</em></h3><span class="price">$5.25</span></div>
+        <div class="item"><h3>Kid's Seasonal Tonic</h3><span class="price">$3.75+</span>
+          <p>Seasonal house-made syrup with tonic, iced.</p></div>
+        <div class="item"><h3>Kid's Milk <em style="color:var(--ink-40); font-style:normal; font-size:1.1rem; letter-spacing:.12em;">Plain, 8oz</em></h3><span class="price">$1.75</span></div>
+        <div class="item"><h3>LMNT Can</h3><span class="price">$4.00</span></div>
+        <div class="item"><h3>LMNT Packet</h3><span class="price">$2.00</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOD -->
+  <section class="menu-section" id="food">
+    <div class="page">
+      <header class="menu-section__head">
+        <h2>Food</h2>
+        <span class="meta">Available online until noon</span>
+      </header>
+      <p class="desc">
+        A short, thoughtful food program. Online menu cuts off at noon — swing
+        by the cafe after to see what's fresh in the case.
+      </p>
+      <div class="items two">
+        <div class="item"><h3>Avocado Toast</h3><span class="price">$10.00</span>
+          <p>Avocado on toasted sourdough, extra virgin olive oil, black sesame, chili flakes, lemon zest, salt &amp; pepper.</p></div>
+        <div class="item"><h3>Yogurt Bowl</h3><span class="price">$8.00</span>
+          <p>Plain or vanilla yogurt, assorted berries, banana, honey drizzle.</p></div>
+        <div class="item"><h3>PB &amp; J</h3><span class="price">$4.50</span>
+          <p>House-made triple berry jelly and peanut butter on Ardor's brioche.</p></div>
+        <div class="item"><h3>Triple Berry Jelly Toast</h3><span class="price">$4.50</span>
+          <p>House-made triple berry jelly on Ardor's brioche.</p></div>
+        <div class="item"><h3>Jar d'Ann Instant Soup</h3><span class="price">$7.00</span></div>
+        <div class="item"><h3>Honey Stick</h3><span class="price">$1.00</span>
+          <p>Local honey.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATERING -->
+  <section class="menu-section" id="catering">
+    <div class="page">
+      <header class="menu-section__head">
+        <h2>Catering</h2>
+        <span class="meta">Offices · Events · Meetings</span>
+      </header>
+      <p class="desc">
+        Bring drip coffee to your next event, meeting, or office. Available in
+        our house or funky offerings. Cups available on request.
+      </p>
+      <div class="items two">
+        <div class="item"><h3>96oz Drip Coffee <em style="color:var(--ink-40); font-style:normal; font-size:1.1rem; letter-spacing:.12em;">House</em></h3><span class="price">$30.00</span></div>
+        <div class="item"><h3>96oz Drip Coffee <em style="color:var(--ink-40); font-style:normal; font-size:1.1rem; letter-spacing:.12em;">Funky</em></h3><span class="price">$39.00</span></div>
+        <div class="item"><h3>Catering Order</h3><span class="price">$149.50</span></div>
+        <div class="item"><h3>Half &amp; Half</h3><span class="price">$7.25</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHOLE BEAN -->
+  <section class="menu-section" id="beans">
+    <div class="page">
+      <header class="menu-section__head">
+        <h2>Whole bean</h2>
+        <span class="meta">Sourced · Roasted · Bagged</span>
+      </header>
+      <p class="desc">
+        We partner with roasters we trust, and stock a rotating selection of
+        single origins, blends, and co-ferments.
+      </p>
+      <div class="items two">
+        <div class="item"><span class="tag">Overtone</span><h3>(Brown) Overtone</h3><span class="price">$23.00</span>
+          <p>Milk Chocolate · Citrus. Guatemala &amp; Ethiopia · 1800m · Washed.</p></div>
+        <div class="item"><span class="tag">Homestead</span><h3>(Peach) Homestead</h3><span class="price">$23.00</span>
+          <p>Peach · Dried Fruit · Juicy. Colombia &amp; Ethiopia · 1500–1800m · Washed.</p></div>
+        <div class="item"><h3>5lb Overtone</h3><span class="price">$108.00</span></div>
+        <div class="item"><h3>Rwanda</h3><span class="price">$24.00</span></div>
+        <div class="item"><h3>Naturally Neighbors</h3><span class="price">$31.00</span></div>
+        <div class="item"><h3>Decaf Ethiopia</h3><span class="price">$26.00</span></div>
+        <div class="item"><h3>Burundi — Ninga 15 PB</h3><span class="price">$30.00</span></div>
+        <div class="item"><h3>Exibia Sabillon Honduras Honey</h3><span class="price">$25.00</span></div>
+        <div class="item"><h3>Banko Chelchele Ethiopia Natural</h3><span class="price">$26.00</span></div>
+        <div class="item"><span class="tag">Dark Roast</span><h3>Turbo Diesel</h3><span class="price">$20.00</span>
+          <p>Brazil Minas Gerais · Peaberry · Pulp Natural. Cacao, caramelized sugar, bold.</p></div>
+        <div class="item"><h3>Peru Choco Malt</h3><span class="price">$20.00</span></div>
+        <div class="item"><span class="tag">Blend</span><h3>Secret Affair</h3><span class="price">$22.50</span>
+          <p>Balearic Beans blend — washed Colombia &amp; Ethiopia alongside fruit-fermented coffees. Sweet tea-like, fruity undertones.</p></div>
+        <div class="item"><h3>Colombia Strawberry Co-Ferment Blend</h3><span class="price">$30.00</span>
+          <p>Edwin Noreña's sequential processing — strawberry jam, long candy-coated finish.</p></div>
+        <div class="item"><h3>The Shadow</h3><span class="price">$20.00</span>
+          <p>Bold and smoky.</p></div>
+        <div class="item"><h3>Peach Co-Ferment</h3><span class="price">$30.00</span></div>
+        <div class="item"><span class="tag">Espresso</span><h3>Affenstark Espresso Blend</h3><span class="price">$22.00</span>
+          <p>Dark chocolate, cocoa nibs, walnut, almond.</p></div>
+        <div class="item"><h3>Costa Rica Red Honey</h3><span class="price">$26.00</span></div>
+        <div class="item"><h3>Ethiopia Organic</h3><span class="price">$26.00</span></div>
+        <div class="item"><h3>Peru Geisha</h3><span class="price">$28.00</span></div>
+        <div class="item"><h3>Colombia La Papaya</h3><span class="price">$35.50</span></div>
+        <div class="item"><h3>The Foundation</h3><span class="price">$14.00</span></div>
+        <div class="item"><h3>Iridescence</h3><span class="price">$40.00</span></div>
+        <div class="item"><h3>Violet</h3><span class="price">$30.00</span></div>
+        <div class="item"><h3>Caturra Natural</h3><span class="price">$17.00</span></div>
+        <div class="item"><h3>Parabolic</h3><span class="price">$32.00</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RETAIL -->
+  <section class="menu-section" id="retail">
+    <div class="page">
+      <header class="menu-section__head">
+        <h2>Retail</h2>
+        <span class="meta">Apparel · Accessories</span>
+      </header>
+      <div class="items two">
+        <div class="item"><span class="tag">Apparel</span><h3>Black Long Sleeve Tee</h3><span class="price">$23.00</span>
+          <p>100% cotton, heavyweight. Screen-printed chest logo, "Respect. Local. Coffee." down the arm.</p></div>
+        <div class="item"><h3>Women's Charcoal 1/4 Zip</h3><span class="price">$36.00</span>
+          <p>Embroidered logo, lightweight fabric.</p></div>
+        <div class="item"><h3>Women's Dusty Green 1/4 Zip</h3><span class="price">$36.00</span>
+          <p>Embroidered logo, lightweight fabric.</p></div>
+        <div class="item"><h3>Black Hooded Sweatshirt</h3><span class="price">$44.00</span></div>
+        <div class="item"><h3>Men's Tan Crewneck</h3><span class="price">$50.00</span></div>
+        <div class="item"><h3>Women's Tan Crewneck</h3><span class="price">$50.00</span></div>
+        <div class="item"><h3>Men's Off-White Crewneck</h3><span class="price">$50.00</span></div>
+        <div class="item"><h3>Women's Off-White Crewneck</h3><span class="price">$50.00</span></div>
+        <div class="item"><span class="tag">Accessories</span><h3>Beanie</h3><span class="price">$14.75</span>
+          <p>Adult, one-size. Custom Reverence leather tag.</p></div>
+        <div class="item"><h3>Keychain</h3><span class="price">$3.75</span></div>
+        <div class="item"><h3>Magnet</h3><span class="price">$2.00</span>
+          <p>Choose one upon pickup.</p></div>
+        <div class="item"><h3>Sticker</h3><span class="price">$1.50</span>
+          <p>Choose one upon pickup.</p></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="page footer-grid">
+    <div>
+      <div class="footer-logo">Reverence</div>
+      <p>
+        Respect. Local. Coffee. A cafe where service, setting, and craft
+        embody true artistry.
+      </p>
+    </div>
+    <div>
+      <h4>Visit</h4>
+      <ul>
+        <li><a href="index.html#locations">East Peoria</a></li>
+        <li><a href="https://maps.google.com/?q=409+Richland+Street,+East+Peoria,+IL+61611" target="_blank" rel="noreferrer">Directions</a></li>
+        <li><a href="index.html#locations">Hours</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="https://www.toasttab.com/reverence-coffee-east-peoria" target="_blank" rel="noreferrer">Order online</a></li>
+        <li><a href="#beans">Whole bean</a></li>
+        <li><a href="https://www.toasttab.com/reverence-coffee-east-peoria/giftcards" target="_blank" rel="noreferrer">Gift cards</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Follow</h4>
+      <ul>
+        <li><a href="https://www.instagram.com/reverence.coffee" target="_blank" rel="noreferrer">Instagram</a></li>
+        <li><a href="https://www.facebook.com/profile.php?id=61556917755282" target="_blank" rel="noreferrer">Facebook</a></li>
+        <li><a href="tel:+13093000640">(309) 300-0640</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="page colophon">
+    <span>&copy; Reverence Coffee Co.</span>
+    <span>409 Richland Street, East Peoria, IL</span>
+    <span>Site brewed at 203°F</span>
+  </div>
+</footer>
+
+<script>
+  // Group nav scroll-spy
+  const links = document.querySelectorAll('.group-nav a');
+  const sections = [...links].map(a => document.querySelector(a.getAttribute('href')));
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting){
+        const id = '#' + e.target.id;
+        links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === id));
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  sections.forEach(s => s && io.observe(s));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,773 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Reverence Coffee</title>
+<meta name="description" content="A local coffee experience where service, setting, and craft embody true artistry.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unica+One&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bone: #EFE9DB;
+    --bone-soft: #E5DECD;
+    --ink: #141414;
+    --ink-60: rgba(20,20,20,.60);
+    --ink-40: rgba(20,20,20,.40);
+    --ink-15: rgba(20,20,20,.15);
+    --accent: #394409;
+    --accent-hover: #4a5710;
+
+    --font-display: "Unica One", "Arial Narrow", sans-serif;
+    --font-mono: "SF Mono", Menlo, Consolas, Monaco, "Liberation Mono", monospace;
+
+    --page-max: 1280px;
+    --gutter: clamp(1.5rem, 4vw, 4rem);
+  }
+
+  *,*::before,*::after{ box-sizing: border-box; }
+
+  html{ font-size: 62.5%; scroll-behavior: smooth; }
+
+  body{
+    margin: 0;
+    background: var(--bone);
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-size: 1.4rem;
+    line-height: 1.65;
+    letter-spacing: 0.02em;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  @media (min-width: 750px){ body{ font-size: 1.5rem; } }
+
+  a{ color: inherit; text-decoration: none; }
+  a:hover{ color: var(--accent); }
+
+  img{ display: block; max-width: 100%; height: auto; }
+
+  h1,h2,h3,h4{
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    line-height: 1.05;
+    margin: 0;
+  }
+
+  .page{ max-width: var(--page-max); margin: 0 auto; padding-inline: var(--gutter); }
+
+  /* ---------- Skip link ---------- */
+  .skip{
+    position: absolute; left: -9999px; top: 0;
+    background: var(--ink); color: var(--bone);
+    padding: .8rem 1.2rem; z-index: 100;
+  }
+  .skip:focus{ left: 1rem; top: 1rem; }
+
+  /* ---------- Announcement bar ---------- */
+  .marquee{
+    background: var(--ink);
+    color: var(--bone);
+    font-size: 1.15rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: .9rem var(--gutter);
+    text-align: center;
+    border-bottom: 1px solid var(--ink);
+  }
+  .marquee a{ border-bottom: 1px solid rgba(239,233,219,.4); padding-bottom: 2px; }
+  .marquee a:hover{ color: var(--bone); border-color: var(--bone); }
+
+  /* ---------- Header ---------- */
+  .site-header{
+    position: sticky; top: 0; z-index: 20;
+    background: var(--bone);
+    border-bottom: 1px solid var(--ink-15);
+  }
+  .site-header .page{
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding-block: 2rem;
+    gap: 2rem;
+  }
+
+  .nav-primary, .nav-utility{
+    display: flex;
+    gap: 2.4rem;
+    font-size: 1.15rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .nav-primary{ justify-content: flex-start; }
+  .nav-utility{ justify-content: flex-end; }
+
+  .nav-primary a, .nav-utility a{
+    position: relative;
+    padding-bottom: 2px;
+  }
+  .nav-primary a::after, .nav-utility a::after{
+    content: "";
+    position: absolute; left: 0; right: 0; bottom: 0;
+    height: 1px; background: currentColor;
+    transform: scaleX(0); transform-origin: left;
+    transition: transform .2s ease;
+  }
+  .nav-primary a:hover::after, .nav-utility a:hover::after{ transform: scaleX(1); }
+
+  .wordmark{
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 2.4vw, 2.6rem);
+    letter-spacing: 0.22em;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  .wordmark small{
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    letter-spacing: 0.4em;
+    margin-top: .4rem;
+    color: var(--ink-60);
+    text-transform: uppercase;
+  }
+
+  .menu-toggle{
+    display: none;
+    background: none; border: 0; padding: 0;
+    font: inherit; color: inherit; cursor: pointer;
+    text-transform: uppercase; letter-spacing: 0.18em;
+    font-size: 1.15rem;
+  }
+
+  @media (max-width: 860px){
+    .site-header .page{ grid-template-columns: auto 1fr auto; }
+    .nav-primary, .nav-utility{ display: none; }
+    .menu-toggle{ display: inline-block; }
+    .wordmark{ text-align: left; }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding-block: clamp(4rem, 8vw, 8rem) clamp(5rem, 10vw, 10rem);
+    border-bottom: 1px solid var(--ink-15);
+  }
+  .hero-inner{
+    display: grid;
+    gap: clamp(3rem, 5vw, 6rem);
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 900px){
+    .hero-inner{ grid-template-columns: 1.1fr .9fr; align-items: end; }
+  }
+
+  .eyebrow{
+    font-size: 1.1rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 2rem;
+    display: inline-flex; align-items: center; gap: 1rem;
+  }
+  .eyebrow::before{
+    content: ""; width: 2.4rem; height: 1px; background: var(--accent);
+  }
+
+  h1.display{
+    font-size: clamp(5.6rem, 11vw, 14rem);
+    line-height: .92;
+    letter-spacing: 0.02em;
+  }
+
+  .hero p.lede{
+    font-size: clamp(1.6rem, 1.6vw, 1.9rem);
+    max-width: 42ch;
+    margin: 3rem 0 0;
+    line-height: 1.5;
+    color: var(--ink-60);
+  }
+
+  .cta-row{
+    margin-top: 3.2rem;
+    display: flex; flex-wrap: wrap; gap: 1.2rem;
+  }
+
+  /* ---------- Buttons ---------- */
+  .btn{
+    display: inline-flex; align-items: center; gap: .8rem;
+    padding: 1.2rem 2rem;
+    font-family: var(--font-mono);
+    font-size: 1.15rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    border: 1px solid var(--ink);
+    background: var(--ink);
+    color: var(--bone);
+    cursor: pointer;
+    transition: background .15s ease, color .15s ease, border-color .15s ease;
+  }
+  .btn:hover{ background: var(--accent); border-color: var(--accent); color: var(--bone); }
+
+  .btn--ghost{
+    background: transparent; color: var(--ink); border-color: var(--ink);
+  }
+  .btn--ghost:hover{ background: var(--ink); color: var(--bone); }
+
+  .btn--accent{
+    background: var(--accent); border-color: var(--accent); color: var(--bone);
+  }
+  .btn--accent:hover{ background: var(--accent-hover); border-color: var(--accent-hover); }
+
+  .btn svg{ width: 1.2rem; height: 1.2rem; }
+
+  /* ---------- Hero image block ---------- */
+  .hero-media{
+    position: relative;
+    aspect-ratio: 4/5;
+    background: var(--ink);
+    overflow: hidden;
+  }
+  .hero-media img{ width: 100%; height: 100%; object-fit: cover; }
+  .hero-media .tag{
+    position: absolute; top: 1.6rem; left: 1.6rem;
+    background: var(--bone); color: var(--ink);
+    padding: .6rem 1rem;
+    font-size: 1rem; letter-spacing: 0.24em; text-transform: uppercase;
+  }
+
+  /* ---------- Ticker row ---------- */
+  .ticker{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--ink-15);
+    border-bottom: 1px solid var(--ink-15);
+    background: var(--bone);
+  }
+  .ticker > div{
+    padding: 2rem var(--gutter);
+    border-right: 1px solid var(--ink-15);
+    font-size: 1.1rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+  .ticker > div:last-child{ border-right: 0; }
+  .ticker strong{
+    display: block;
+    font-family: var(--font-display);
+    font-size: 2rem;
+    letter-spacing: 0.1em;
+    margin-bottom: .4rem;
+    color: var(--accent);
+  }
+  @media (max-width: 860px){
+    .ticker{ grid-template-columns: 1fr 1fr; }
+    .ticker > div:nth-child(2){ border-right: 0; }
+    .ticker > div:nth-child(-n+2){ border-bottom: 1px solid var(--ink-15); }
+  }
+
+  /* ---------- Section heading row ---------- */
+  .section{ padding-block: clamp(6rem, 10vw, 11rem); }
+  .section + .section{ border-top: 1px solid var(--ink-15); }
+
+  .section-head{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-bottom: clamp(4rem, 6vw, 6rem);
+    align-items: end;
+  }
+  @media (min-width: 900px){
+    .section-head{ grid-template-columns: 1fr auto; }
+  }
+  .section-head h2{
+    font-size: clamp(3.6rem, 6vw, 7rem);
+  }
+  .section-head .caption{
+    font-size: 1.1rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--ink-60);
+    justify-self: end;
+  }
+
+  .rule{ height: 1px; background: var(--ink-15); margin: 0; border: 0; }
+
+  /* ---------- Dual cards (Taste / Locals) ---------- */
+  .pair{
+    display: grid; gap: 0;
+    grid-template-columns: 1fr;
+    border: 1px solid var(--ink-15);
+  }
+  @media (min-width: 860px){
+    .pair{ grid-template-columns: 1fr 1fr; }
+  }
+  .pair > article{
+    padding: clamp(3rem, 4vw, 5rem);
+    display: flex; flex-direction: column; gap: 2rem;
+  }
+  .pair > article + article{
+    border-top: 1px solid var(--ink-15);
+  }
+  @media (min-width: 860px){
+    .pair > article + article{ border-top: 0; border-left: 1px solid var(--ink-15); }
+  }
+  .pair h3{ font-size: clamp(2.8rem, 3vw, 3.6rem); }
+  .pair p{ color: var(--ink-60); margin: 0; max-width: 48ch; }
+  .pair .num{
+    font-family: var(--font-mono);
+    font-size: 1rem; letter-spacing: 0.32em; color: var(--accent);
+    text-transform: uppercase;
+  }
+  .pair .btn{ align-self: flex-start; margin-top: auto; }
+
+  /* ---------- Gift card callout ---------- */
+  .giftcard{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    border: 1px solid var(--ink);
+    overflow: hidden;
+    background: var(--bone-soft);
+  }
+  @media (min-width: 900px){
+    .giftcard{ grid-template-columns: 1.1fr .9fr; }
+  }
+  .giftcard__media{
+    background: var(--bone);
+    display: flex; align-items: center; justify-content: center;
+    padding: clamp(2rem, 4vw, 4rem);
+    min-height: 32rem;
+    border-bottom: 1px solid var(--ink);
+  }
+  @media (min-width: 900px){
+    .giftcard__media{ border-bottom: 0; border-right: 1px solid var(--ink); }
+  }
+  .giftcard__media img{
+    max-height: 40rem; max-width: 100%; width: auto; height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 12px 28px rgba(0,0,0,.22));
+  }
+  .giftcard__body{
+    padding: clamp(3rem, 5vw, 6rem);
+    display: flex; flex-direction: column; justify-content: center;
+    gap: 1.6rem;
+  }
+  .giftcard__body h3{
+    font-size: clamp(3.2rem, 4.5vw, 5.6rem);
+    line-height: 1;
+  }
+  .giftcard__body p{ color: var(--ink-60); margin: 0; max-width: 44ch; }
+  .giftcard__body .num{
+    font-family: var(--font-mono); font-size: 1rem;
+    letter-spacing: 0.32em; color: var(--accent); text-transform: uppercase;
+  }
+  .giftcard__body .btn{ align-self: flex-start; margin-top: 1.2rem; }
+
+  /* ---------- Accent block (the former background, now an accent) ---------- */
+  .accent-block{
+    background: var(--accent);
+    color: var(--bone);
+    padding-block: clamp(7rem, 10vw, 11rem);
+    position: relative;
+  }
+  .accent-block h2{
+    font-size: clamp(4rem, 7vw, 9rem);
+    max-width: 18ch;
+  }
+  .accent-block p{
+    color: rgba(239,233,219,.7);
+    max-width: 52ch;
+    margin-top: 2.4rem;
+  }
+  .accent-block .btn{
+    background: var(--bone); color: var(--accent); border-color: var(--bone);
+    margin-top: 3.2rem;
+  }
+  .accent-block .btn:hover{
+    background: var(--ink); color: var(--bone); border-color: var(--ink);
+  }
+  .accent-block .corner{
+    position: absolute; top: 2rem; right: var(--gutter);
+    font-size: 1rem; letter-spacing: 0.32em; text-transform: uppercase;
+    color: rgba(239,233,219,.6);
+  }
+
+  /* ---------- Locations ---------- */
+  .locations{
+    display: grid; gap: 3rem;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 860px){
+    .locations{ grid-template-columns: 1fr 1fr; gap: 4rem; }
+  }
+  .location{
+    border-top: 1px solid var(--ink);
+    padding-top: 2.4rem;
+  }
+  .location h3{
+    font-size: clamp(3rem, 4vw, 4.4rem);
+    margin-bottom: 2rem;
+  }
+  .location dl{
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: .8rem 2rem;
+    margin: 0;
+    font-size: 1.3rem;
+  }
+  .location dt{
+    font-size: 1rem; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--ink-60);
+    padding-top: .2rem;
+  }
+  .location dd{ margin: 0; }
+  .location .status{
+    display: inline-flex; align-items: center; gap: .8rem;
+    font-size: 1.1rem; letter-spacing: 0.22em; text-transform: uppercase;
+    margin-top: 2rem;
+  }
+  .dot{
+    width: .8rem; height: .8rem; border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 3px rgba(57,68,9,.2);
+  }
+  .location-actions{
+    display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2.4rem;
+  }
+
+  /* ---------- Rewards ---------- */
+  .rewards{
+    display: grid; gap: 3rem; align-items: center;
+    grid-template-columns: 1fr;
+    border: 1px solid var(--ink-15);
+    padding: clamp(3rem, 4vw, 5rem);
+  }
+  @media (min-width: 900px){ .rewards{ grid-template-columns: 1fr 1fr; gap: 5rem; } }
+  .rewards h2{ font-size: clamp(3.2rem, 4vw, 5rem); }
+  .rewards p{ color: var(--ink-60); margin: 1.6rem 0 0; max-width: 44ch; }
+  .form{
+    display: flex; flex-direction: column; gap: 1rem;
+  }
+  .form label{
+    font-size: 1rem; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--ink-60);
+  }
+  .form input{
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--ink);
+    padding: 1.2rem 0;
+    font: inherit;
+    color: var(--ink);
+    outline: none;
+  }
+  .form input::placeholder{ color: var(--ink-40); }
+  .form input:focus{ border-color: var(--accent); }
+  .form small{
+    color: var(--ink-60); font-size: 1.05rem; line-height: 1.5;
+    margin-top: 1rem; display: block;
+  }
+
+  /* ---------- Footer ---------- */
+  footer.site-footer{
+    background: var(--ink);
+    color: var(--bone);
+    padding-block: clamp(5rem, 8vw, 8rem) 2rem;
+    margin-top: clamp(4rem, 8vw, 8rem);
+  }
+  .footer-grid{
+    display: grid; gap: 4rem;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 860px){
+    .footer-grid{ grid-template-columns: 2fr 1fr 1fr 1fr; }
+  }
+  .site-footer h4{
+    font-size: 1.1rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: rgba(239,233,219,.6);
+    margin-bottom: 1.8rem;
+    font-family: var(--font-mono);
+    font-weight: 400;
+  }
+  .site-footer ul{ list-style: none; padding: 0; margin: 0; display: grid; gap: .8rem; }
+  .site-footer a:hover{ color: var(--accent); }
+  .footer-logo{
+    font-family: var(--font-display);
+    font-size: 3.2rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+  .footer-logo + p{ color: rgba(239,233,219,.7); max-width: 38ch; }
+
+  .colophon{
+    margin-top: 6rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(239,233,219,.18);
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1.6rem;
+    font-size: 1.05rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(239,233,219,.55);
+  }
+
+  /* ---------- Utility ---------- */
+  .visually-hidden{
+    position: absolute!important; clip: rect(0 0 0 0); width:1px; height:1px;
+    margin:-1px; padding:0; border:0; overflow:hidden;
+  }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="marquee">
+  Now open in East Peoria <span aria-hidden="true">•</span>
+  <a href="#locations">409 Richland Street &rarr;</a>
+</div>
+
+<header class="site-header">
+  <div class="page">
+    <nav class="nav-primary" aria-label="Primary">
+      <a href="menu.html">Menu</a>
+      <a href="about.html">About</a>
+      <a href="#locations">Visit</a>
+    </nav>
+
+    <button class="menu-toggle" aria-expanded="false" aria-controls="mobile-nav">Menu</button>
+
+    <a class="wordmark" href="/" aria-label="Reverence Coffee — Home">
+      Reverence
+      <small>Coffee Co. · EST.</small>
+    </a>
+
+    <nav class="nav-utility" aria-label="Utility">
+      <a href="#rewards">Rewards</a>
+      <a href="https://www.toasttab.com/reverence-coffee-east-peoria/giftcards" target="_blank" rel="noreferrer">Gift cards</a>
+      <a href="https://www.toasttab.com/reverence-coffee-east-peoria" target="_blank" rel="noreferrer">Order</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="page hero-inner">
+      <div>
+        <span class="eyebrow">Respect · Local · Coffee</span>
+        <h1 class="display">Coffee<br>worth<br>slowing<br>down for.</h1>
+        <p class="lede">
+          A cafe where service, setting, and craft embody true artistry.
+          We source from renowned roasteries and pass each cup with intention —
+          honoring every stage through the art of extraction.
+        </p>
+        <div class="cta-row">
+          <a class="btn" href="https://www.toasttab.com/reverence-coffee-east-peoria" target="_blank" rel="noreferrer">Order online
+            <svg viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M8.5.8a.5.5 0 0 1 .8-.2l4 4a.5.5 0 0 1 0 .7l-4 4a.5.5 0 1 1-.7-.7L11.8 5.5H1a.5.5 0 0 1 0-1h10.8L8.6 1.4A.5.5 0 0 1 8.5.8Z" fill="currentColor"/></svg>
+          </a>
+          <a class="btn btn--ghost" href="menu.html">View the menu</a>
+        </div>
+      </div>
+
+      <figure class="hero-media">
+        <span class="tag">No. 01 — The Craft</span>
+        <img alt="Reverence Coffee — East Peoria, IL" src="rev_landing.webp">
+      </figure>
+    </div>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker" aria-label="At a glance">
+    <div><strong>203°F</strong>Extraction<br>temperature</div>
+    <div><strong>1:2</strong>Brew ratio<br>by weight</div>
+    <div><strong>45s</strong>Drawdown<br>target</div>
+    <div><strong>2</strong>Locations<br>in Peoria</div>
+  </div>
+
+  <!-- PAIR CARDS -->
+  <section class="section" id="story">
+    <div class="page">
+      <header class="section-head">
+        <h2>Two simple<br>commitments</h2>
+        <span class="caption">Reverence, the noun</span>
+      </header>
+
+      <div class="pair">
+        <article>
+          <span class="num">01 / Craft</span>
+          <h3>Taste the difference.</h3>
+          <p>
+            We curate a diverse and exquisite selection of specialty coffees sourced from
+            renowned roasteries — a menu built for every palate and finely tuned by
+            baristas who care about the last five grams.
+          </p>
+          <a class="btn btn--ghost" href="menu.html">View the menu</a>
+        </article>
+        <article>
+          <span class="num">02 / Community</span>
+          <h3>Locals serving locals.</h3>
+          <p>
+            A hub for coffee aficionados and community enthusiasts. Specialty
+            craftsmanship, quality service, and a welcoming gathering place — no matter
+            whether it's your first visit or your fiftieth.
+          </p>
+          <a class="btn btn--ghost" href="about.html">Our story</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- GIFT CARD -->
+  <section class="section" id="giftcards">
+    <div class="page">
+      <div class="giftcard">
+        <div class="giftcard__media">
+          <img alt="Reverence Coffee gift card" src="gift_card_img.webp">
+        </div>
+        <div class="giftcard__body">
+          <h3>Give a gift<br>card</h3>
+          <p>
+            The right answer for birthdays, thank-yous, and last-minute presents.
+            Delivered instantly; redeemable in-store or on any online order.
+          </p>
+          <a class="btn" href="https://www.toasttab.com/reverence-coffee-east-peoria/giftcards" target="_blank" rel="noreferrer">Buy a gift card
+            <svg viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M8.5.8a.5.5 0 0 1 .8-.2l4 4a.5.5 0 0 1 0 .7l-4 4a.5.5 0 1 1-.7-.7L11.8 5.5H1a.5.5 0 0 1 0-1h10.8L8.6 1.4A.5.5 0 0 1 8.5.8Z" fill="currentColor"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCENT BLOCK (the former background, used as the accent) -->
+  <section class="accent-block" id="beans">
+    <div class="page">
+      <h2>Bring the taste of Reverence home</h2>
+      <p>
+        Whole-bean coffee, roasted with partners we trust, available by the bag
+        at the cafe or delivered to your door.
+      </p>
+      <a class="btn" href="menu.html#beans">Shop whole bean
+        <svg viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M8.5.8a.5.5 0 0 1 .8-.2l4 4a.5.5 0 0 1 0 .7l-4 4a.5.5 0 1 1-.7-.7L11.8 5.5H1a.5.5 0 0 1 0-1h10.8L8.6 1.4A.5.5 0 0 1 8.5.8Z" fill="currentColor"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- LOCATIONS -->
+  <section class="section" id="locations">
+    <div class="page">
+      <header class="section-head">
+        <h2>Locations<br>&amp; hours</h2>
+        <span class="caption">Two cafes in Peoria</span>
+      </header>
+
+      <div class="locations">
+        <article class="location">
+          <h3>East Peoria<br>Levee District.</h3>
+          <dl>
+            <dt>Address</dt>
+            <dd><a href="https://maps.google.com/?q=409+Richland+Street,+East+Peoria,+IL+61611" target="_blank" rel="noreferrer">409 Richland Street<br>East Peoria, IL 61611</a></dd>
+            <dt>Phone</dt>
+            <dd><a href="tel:+13093000640">(309) 300-0640</a></dd>
+            <dt>Mon&ndash;Sat</dt>
+            <dd>6:45a &ndash; 5:00p</dd>
+            <dt>Sunday</dt>
+            <dd>7:45a &ndash; 2:00p</dd>
+          </dl>
+          <div class="status"><span class="dot" aria-hidden="true"></span>Open today &middot; closes 5pm</div>
+          <div class="location-actions">
+            <a class="btn" href="https://www.toasttab.com/reverence-coffee-east-peoria" target="_blank" rel="noreferrer">Order pickup</a>
+            <a class="btn btn--ghost" href="https://maps.google.com/?q=409+Richland+Street,+East+Peoria,+IL+61611" target="_blank" rel="noreferrer">Directions</a>
+          </div>
+        </article>
+
+        <article class="location">
+          <h3>Coming soon<br>— stay tuned.</h3>
+          <dl>
+            <dt>Status</dt>
+            <dd>Scouting the next site.</dd>
+            <dt>Updates</dt>
+            <dd><a href="#rewards">Sign up for rewards</a> to hear first.</dd>
+          </dl>
+          <div class="status" style="color: var(--ink-60);"><span class="dot" style="background: var(--ink-40); box-shadow: 0 0 0 3px rgba(20,20,20,.08);" aria-hidden="true"></span>Not yet open</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- REWARDS -->
+  <section class="section" id="rewards">
+    <div class="page">
+      <div class="rewards">
+        <div>
+          <h2>A quiet way<br>to thank you</h2>
+          <p>
+            Earn one point for every dollar. Forty points earns you a drink
+            on us. No app bloat, no spam — just a little something for the regulars.
+          </p>
+        </div>
+        <form class="form" onsubmit="event.preventDefault(); this.querySelector('small').textContent='Thanks — we\\'ll text you shortly.'; this.reset();">
+          <label for="phone">Phone number</label>
+          <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="(309) 000-0000" required>
+          <button class="btn btn--accent" type="submit" style="margin-top: 1.6rem; align-self: flex-start;">Sign up</button>
+          <small>
+            By providing your number, you agree to receive occasional SMS.
+            Msg &amp; data rates may apply. Reply STOP to opt out.
+          </small>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer" id="footer">
+  <div class="page footer-grid">
+    <div>
+      <div class="footer-logo">Reverence</div>
+      <p>
+        Respect. Local. Coffee. A cafe where service, setting, and craft
+        embody true artistry.
+      </p>
+    </div>
+
+    <div>
+      <h4>Visit</h4>
+      <ul>
+        <li><a href="#locations">East Peoria</a></li>
+        <li><a href="#locations">Directions</a></li>
+        <li><a href="#locations">Hours</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="https://www.toasttab.com/reverence-coffee-east-peoria" target="_blank" rel="noreferrer">Order online</a></li>
+        <li><a href="menu.html#beans">Whole bean</a></li>
+        <li><a href="https://www.toasttab.com/reverence-coffee-east-peoria/giftcards" target="_blank" rel="noreferrer">Gift cards</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4>Follow</h4>
+      <ul>
+        <li><a href="https://www.instagram.com/reverence.coffee" target="_blank" rel="noreferrer">Instagram</a></li>
+        <li><a href="https://www.facebook.com/profile.php?id=61556917755282" target="_blank" rel="noreferrer">Facebook</a></li>
+        <li><a href="mailto:hello@reverencecoffeeil.com">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="page colophon">
+    <span>&copy; Reverence Coffee Co.</span>
+    <span>Peoria, Illinois</span>
+    <span>Site brewed at 203°F</span>
+  </div>
+</footer>
+
+</body>
+</html>

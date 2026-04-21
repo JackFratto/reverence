@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>About — Reverence Coffee</title>
+<meta name="description" content="Chris & Kelsey Olson on why they opened Reverence Coffee in the Levee District — Third Wave coffee with cozy elegance, built locally.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unica+One&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bone: #EFE9DB;
+    --bone-soft: #E5DECD;
+    --ink: #141414;
+    --ink-60: rgba(20,20,20,.60);
+    --ink-40: rgba(20,20,20,.40);
+    --ink-15: rgba(20,20,20,.15);
+    --accent: #394409;
+    --accent-hover: #4a5710;
+
+    --font-display: "Unica One", "Arial Narrow", sans-serif;
+    --font-mono: "SF Mono", Menlo, Consolas, Monaco, "Liberation Mono", monospace;
+
+    --page-max: 1280px;
+    --gutter: clamp(1.5rem, 4vw, 4rem);
+  }
+
+  *,*::before,*::after{ box-sizing: border-box; }
+  html{ font-size: 62.5%; scroll-behavior: smooth; }
+
+  body{
+    margin: 0; background: var(--bone); color: var(--ink);
+    font-family: var(--font-mono); font-size: 1.4rem;
+    line-height: 1.65; letter-spacing: 0.02em;
+    -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  }
+  @media (min-width: 750px){ body{ font-size: 1.5rem; } }
+
+  a{ color: inherit; text-decoration: none; }
+  a:hover{ color: var(--accent); }
+  img{ display: block; max-width: 100%; height: auto; }
+
+  h1,h2,h3,h4{
+    font-family: var(--font-display); font-weight: 400;
+    text-transform: uppercase; letter-spacing: 0.04em;
+    line-height: 1.05; margin: 0;
+  }
+
+  .page{ max-width: var(--page-max); margin: 0 auto; padding-inline: var(--gutter); }
+
+  .skip{ position:absolute; left:-9999px; top:0; background: var(--ink); color: var(--bone); padding: .8rem 1.2rem; z-index: 100; }
+  .skip:focus{ left:1rem; top:1rem; }
+
+  .marquee{
+    background: var(--ink); color: var(--bone);
+    font-size: 1.15rem; letter-spacing: 0.16em; text-transform: uppercase;
+    padding: .9rem var(--gutter); text-align: center;
+  }
+  .marquee a{ border-bottom: 1px solid rgba(239,233,219,.4); padding-bottom: 2px; }
+  .marquee a:hover{ color: var(--bone); border-color: var(--bone); }
+
+  /* Header */
+  .site-header{ position: sticky; top:0; z-index: 20; background: var(--bone); border-bottom: 1px solid var(--ink-15); }
+  .site-header .page{
+    display:grid; grid-template-columns: 1fr auto 1fr;
+    align-items:center; padding-block: 2rem; gap: 2rem;
+  }
+  .nav-primary, .nav-utility{
+    display:flex; gap: 2.4rem; font-size: 1.15rem;
+    letter-spacing: 0.18em; text-transform: uppercase;
+  }
+  .nav-primary{ justify-content: flex-start; }
+  .nav-utility{ justify-content: flex-end; }
+  .nav-primary a, .nav-utility a{ position:relative; padding-bottom: 2px; }
+  .nav-primary a.active, .nav-utility a.active{ color: var(--accent); }
+  .nav-primary a::after, .nav-utility a::after{
+    content:""; position:absolute; left:0; right:0; bottom:0; height:1px;
+    background: currentColor; transform: scaleX(0); transform-origin: left;
+    transition: transform .2s ease;
+  }
+  .nav-primary a:hover::after, .nav-utility a:hover::after,
+  .nav-primary a.active::after, .nav-utility a.active::after{ transform: scaleX(1); }
+  .wordmark{
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 2.4vw, 2.6rem);
+    letter-spacing: 0.22em; text-align:center; text-transform: uppercase;
+  }
+  .wordmark small{
+    display:block; font-family: var(--font-mono); font-size: 1rem;
+    letter-spacing: 0.4em; margin-top: .4rem; color: var(--ink-60);
+    text-transform: uppercase;
+  }
+  .menu-toggle{ display:none; background:none; border:0; padding:0; font:inherit;
+    color:inherit; cursor:pointer; text-transform:uppercase; letter-spacing:.18em; font-size:1.15rem; }
+  @media (max-width: 860px){
+    .site-header .page{ grid-template-columns: auto 1fr auto; }
+    .nav-primary, .nav-utility{ display:none; }
+    .menu-toggle{ display:inline-block; }
+    .wordmark{ text-align:left; }
+  }
+
+  /* About hero */
+  .about-hero{
+    padding-block: clamp(6rem, 10vw, 11rem) clamp(3rem, 5vw, 5rem);
+    border-bottom: 1px solid var(--ink-15);
+  }
+  .eyebrow{
+    font-size: 1.1rem; letter-spacing: 0.32em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 2.4rem;
+    display: inline-flex; align-items:center; gap: 1rem;
+  }
+  .eyebrow::before{ content:""; width: 2.4rem; height: 1px; background: var(--accent); }
+  .about-hero h1{
+    font-size: clamp(5.6rem, 10vw, 12rem); line-height: .92; max-width: 14ch;
+  }
+  .about-hero .sub{
+    margin-top: 3rem; color: var(--ink-60);
+    font-size: clamp(1.5rem, 1.4vw, 1.7rem);
+    max-width: 58ch;
+  }
+
+  /* Article layout */
+  .article-wrap{
+    padding-block: clamp(4rem, 7vw, 7rem);
+    display: grid; gap: clamp(3rem, 6vw, 7rem);
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+  @media (min-width: 900px){
+    .article-wrap{ grid-template-columns: minmax(28rem, 38rem) 1fr; gap: clamp(4rem, 7vw, 9rem); }
+  }
+
+  .portrait{
+    position: relative;
+    aspect-ratio: 4/5; background: var(--ink); overflow: hidden;
+  }
+  .portrait img{ width:100%; height:100%; object-fit: cover; }
+  .portrait figcaption{
+    margin-top: 1.2rem;
+    font-size: 1rem; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--ink-60);
+  }
+  @media (min-width: 900px){
+    .portrait{ position: sticky; top: 12rem; }
+  }
+
+  .article{
+    font-size: 1.55rem; line-height: 1.8; color: rgba(20,20,20,.82);
+    max-width: 62ch;
+  }
+  .article h2{
+    font-size: clamp(2.8rem, 3.4vw, 4rem);
+    margin: 4.4rem 0 1.8rem;
+  }
+  .article h2:first-child{ margin-top: 0; }
+  .article p{ margin: 0 0 1.6rem; }
+  .article .lede{
+    font-size: clamp(1.8rem, 1.9vw, 2.2rem);
+    line-height: 1.45; color: var(--ink);
+    margin-bottom: 3.2rem;
+  }
+  .article .dropcap::first-letter{
+    font-family: var(--font-display); font-size: 6rem; line-height: .85;
+    float: left; padding: .4rem 1rem 0 0; color: var(--accent);
+    text-transform: uppercase;
+  }
+  .article blockquote{
+    margin: 3.2rem 0; padding: 0 0 0 2.4rem;
+    border-left: 2px solid var(--accent);
+    font-family: var(--font-display); text-transform: uppercase;
+    letter-spacing: 0.04em; font-size: clamp(2rem, 2.4vw, 2.8rem);
+    line-height: 1.15; color: var(--ink);
+  }
+  .article .pullquote{
+    display: block;
+    font-family: var(--font-display); text-transform: uppercase;
+    font-size: clamp(3.2rem, 5vw, 5.2rem); line-height: 1;
+    color: var(--accent); letter-spacing: 0.04em;
+    margin: 4rem 0;
+  }
+  .article em{ color: var(--ink); font-style: italic; }
+  .article strong{ color: var(--ink); font-weight: 500; letter-spacing: 0.04em; }
+
+  .signoff{
+    margin-top: 4rem;
+    display: flex; align-items: center; gap: 1.6rem;
+    font-family: var(--font-display); text-transform: uppercase;
+    letter-spacing: 0.2em; font-size: 1.3rem; color: var(--ink-60);
+  }
+  .signoff::before{ content:""; width: 3.2rem; height: 1px; background: var(--ink-40); }
+
+  /* CTA row */
+  .cta-row{ margin-top: 4rem; display: flex; gap: 1.2rem; flex-wrap: wrap; }
+  .btn{
+    display: inline-flex; align-items:center; gap: .8rem;
+    padding: 1.2rem 2rem;
+    font-family: var(--font-mono); font-size: 1.15rem;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    border: 1px solid var(--ink);
+    background: var(--ink); color: var(--bone);
+    cursor: pointer;
+    transition: background .15s, color .15s, border-color .15s;
+  }
+  .btn:hover{ background: var(--accent); border-color: var(--accent); color: var(--bone); }
+  .btn--ghost{ background: transparent; color: var(--ink); }
+  .btn--ghost:hover{ background: var(--ink); color: var(--bone); }
+  .btn svg{ width: 1.2rem; height: 1.2rem; }
+
+  /* Tenets strip */
+  .tenets{
+    border-top: 1px solid var(--ink-15);
+    border-bottom: 1px solid var(--ink-15);
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    background: var(--bone);
+  }
+  .tenets > div{
+    padding: clamp(3rem, 5vw, 5rem) var(--gutter);
+    border-right: 1px solid var(--ink-15);
+  }
+  .tenets > div:last-child{ border-right: 0; }
+  .tenets h3{
+    font-family: var(--font-display); text-transform: uppercase;
+    letter-spacing: 0.04em; font-size: clamp(2.4rem, 3vw, 3.4rem);
+    color: var(--accent); margin-bottom: 1.2rem;
+  }
+  .tenets p{ color: var(--ink-60); margin: 0; }
+  @media (max-width: 860px){
+    .tenets{ grid-template-columns: 1fr; }
+    .tenets > div{ border-right: 0; border-bottom: 1px solid var(--ink-15); }
+    .tenets > div:last-child{ border-bottom: 0; }
+  }
+
+  /* Footer */
+  footer.site-footer{
+    background: var(--ink); color: var(--bone);
+    padding-block: clamp(5rem, 8vw, 8rem) 2rem;
+    margin-top: clamp(4rem, 8vw, 8rem);
+  }
+  .footer-grid{ display:grid; gap: 4rem; grid-template-columns: 1fr; }
+  @media (min-width: 860px){ .footer-grid{ grid-template-columns: 2fr 1fr 1fr 1fr; } }
+  .site-footer h4{
+    font-size: 1.1rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: rgba(239,233,219,.6); margin-bottom: 1.8rem;
+    font-family: var(--font-mono); font-weight: 400;
+  }
+  .site-footer ul{ list-style: none; padding:0; margin:0; display: grid; gap: .8rem; }
+  .site-footer a:hover{ color: var(--accent); }
+  .footer-logo{
+    font-family: var(--font-display); font-size: 3.2rem;
+    letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 2rem;
+  }
+  .footer-logo + p{ color: rgba(239,233,219,.7); max-width: 38ch; }
+  .colophon{
+    margin-top: 6rem; padding-top: 2rem;
+    border-top: 1px solid rgba(239,233,219,.18);
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1.6rem;
+    font-size: 1.05rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(239,233,219,.55);
+  }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="marquee">
+  Now open in East Peoria <span aria-hidden="true">•</span>
+  <a href="index.html#locations">409 Richland Street &rarr;</a>
+</div>
+
+<header class="site-header">
+  <div class="page">
+    <nav class="nav-primary" aria-label="Primary">
+      <a href="menu.html">Menu</a>
+      <a class="active" href="about.html">About</a>
+      <a href="index.html#locations">Visit</a>
+    </nav>
+    <button class="menu-toggle" aria-expanded="false">Menu</button>
+    <a class="wordmark" href="index.html" aria-label="Reverence Coffee — Home">
+      Reverence
+      <small>Coffee Co. · EST.</small>
+    </a>
+    <nav class="nav-utility" aria-label="Utility">
+      <a href="index.html#rewards">Rewards</a>
+      <a href="https://www.toasttab.com/reverence-coffee-east-peoria/giftcards" target="_blank" rel="noreferrer">Gift cards</a>
+      <a href="https://www.toasttab.com/reverence-coffee-east-peoria" target="_blank" rel="noreferrer">Order</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="about-hero">
+    <div class="page">
+      <span class="eyebrow">A founders' note</span>
+      <h1>Respect,<br>the noun.</h1>
+      <p class="sub">
+        Chris &amp; Kelsey Olson on why a Third Wave cafe belongs in the Levee District,
+        how the name arrived, and what <em>cozy elegance</em> actually means to us.
+      </p>
+    </div>
+  </section>
+
+  <!-- TENETS -->
+  <div class="tenets" aria-label="Tenets">
+    <div>
+      <h3>Respect.</h3>
+      <p>For the bean, the farmer, the roaster, the barista, and the person on the other side of the counter.</p>
+    </div>
+    <div>
+      <h3>Local.</h3>
+      <p>Built in East Peoria, by East Peoria locals — for the neighbors we share streets, sidewalks, and mornings with.</p>
+    </div>
+    <div>
+      <h3>Coffee.</h3>
+      <p>Carefully sourced specialty coffee, finely tuned by baristas who care about the last five grams.</p>
+    </div>
+  </div>
+
+  <!-- ARTICLE -->
+  <div class="page article-wrap">
+    <figure class="portrait">
+      <img alt="Chris and Kelsey Olson, owners of Reverence Coffee"
+           src="https://d1w7312wesee68.cloudfront.net/-HHT0KntWovvOkAObIc7zmdaaTX_5tG6RgAz2a1NXjU/ext:webp/quality:85/preset:large/c:960:1097:ce:0:-171/plain/s3://toast-sites-resources-prod/restaurantImages/838ef918-5aeb-46be-bcfa-4b8ad487bc4a/Screenshot2024-05-20174001.png">
+      <figcaption>Chris &amp; Kelsey Olson · Owners</figcaption>
+    </figure>
+
+    <article class="article">
+      <p class="lede">
+        We're Chris &amp; Kelsey Olson — brand new business owners with a passion for
+        Third Wave coffee and a motivation to bring it to the Levee District.
+      </p>
+
+      <p class="dropcap">
+        As a family, we enjoy experiencing local coffee shops wherever we are. Being
+        East Peoria locals ourselves, we felt a void of this in our city. So, the
+        idea arose — and here we are.
+      </p>
+
+      <h2>Where "Reverence" came from.</h2>
+      <p>
+        Our mindset here is to <strong>respect</strong> coffee and show off all the
+        amazing — and sometimes exotic — qualities it can have. Looking for
+        synonyms, we came across "Reverence." With such a strong feel to the word,
+        we were immediately drawn to it, and the brand and concept followed.
+      </p>
+
+      <span class="pullquote">More than<br>a beverage.</span>
+
+      <h2>Coffee, locally.</h2>
+      <p>
+        We strive to create an exceptional coffee experience that transcends the
+        ordinary — on a <em>local</em> scale. Through our dedication to sourcing
+        beans from renowned roasteries, we curate a diverse and exquisite selection
+        of specialty coffees that cater to every palate. Our experienced baristas
+        bring those specifically curated beans to life.
+      </p>
+
+      <h2>Cozy elegance.</h2>
+      <p>
+        Our warm atmosphere provides a sanctuary where patrons can savor their
+        coffee amidst the harmonious interplay of comfort and sophistication — a
+        term we coined for our design concept: <em>cozy elegance</em>. We believe a
+        cup of coffee should be more than a beverage; it should be an experience
+        that enriches your senses and soothes your soul.
+      </p>
+
+      <blockquote>
+        Slow down and enjoy the company you're with, the beverage of your choice,
+        and a beautiful atmosphere.
+      </blockquote>
+
+      <h2>Bring people together.</h2>
+      <p>
+        Our goal is to bring locals together — whether that's with friends, family,
+        coworkers, or clients. We hope to help you slow down and enjoy the company
+        you're with, your beverage of choice, and a beautiful atmosphere.
+      </p>
+
+      <p>We look forward to seeing you soon.</p>
+
+      <div class="signoff">— Chris &amp; Kelsey</div>
+
+      <div class="cta-row">
+        <a class="btn" href="menu.html">View the menu
+          <svg viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M8.5.8a.5.5 0 0 1 .8-.2l4 4a.5.5 0 0 1 0 .7l-4 4a.5.5 0 1 1-.7-.7L11.8 5.5H1a.5.5 0 0 1 0-1h10.8L8.6 1.4A.5.5 0 0 1 8.5.8Z" fill="currentColor"/></svg>
+        </a>
+        <a class="btn btn--ghost" href="index.html#locations">Visit the cafe</a>
+      </div>
+    </article>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="page footer-grid">
+    <div>
+      <div class="footer-logo">Reverence</div>
+      <p>Respect. Local. Coffee. A cafe where service, setting, and craft embody true artistry.</p>
+    </div>
+    <div>
+      <h4>Visit</h4>
+      <ul>
+        <li><a href="index.html#locations">East Peoria</a></li>
+        <li><a href="https://maps.google.com/?q=409+Richland+Street,+East+Peoria,+IL+61611" target="_blank" rel="noreferrer">Directions</a></li>
+        <li><a href="index.html#locations">Hours</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="https://www.toasttab.com/reverence-coffee-east-peoria" target="_blank" rel="noreferrer">Order online</a></li>
+        <li><a href="menu.html#beans">Whole bean</a></li>
+        <li><a href="https://www.toasttab.com/reverence-coffee-east-peoria/giftcards" target="_blank" rel="noreferrer">Gift cards</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Follow</h4>
+      <ul>
+        <li><a href="https://www.instagram.com/reverence.coffee" target="_blank" rel="noreferrer">Instagram</a></li>
+        <li><a href="https://www.facebook.com/profile.php?id=61556917755282" target="_blank" rel="noreferrer">Facebook</a></li>
+        <li><a href="tel:+13093000640">(309) 300-0640</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="page colophon">
+    <span>&copy; Reverence Coffee Co.</span>
+    <span>409 Richland Street, East Peoria, IL</span>
+    <span>Site brewed at 203°F</span>
+  </div>
+</footer>
+
+</body>
+</html>

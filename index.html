@@ -402,7 +402,7 @@
     grid-template-columns: 1fr;
   }
   @media (min-width: 860px){
-    .locations{ grid-template-columns: 1fr 1fr; gap: 4rem; }
+    .locations{ grid-template-columns: minmax(0, 56rem); justify-content: start; gap: 4rem; }
   }
   .location{
     border-top: 1px solid var(--ink);
@@ -585,7 +585,7 @@
     <div><strong>203°F</strong>Extraction<br>temperature</div>
     <div><strong>1:2</strong>Brew ratio<br>by weight</div>
     <div><strong>45s</strong>Drawdown<br>target</div>
-    <div><strong>2</strong>Locations<br>in Peoria</div>
+    <div><strong>7</strong>Days<br>open weekly</div>
   </div>
 
   <!-- PAIR CARDS -->
@@ -660,8 +660,8 @@
   <section class="section" id="locations">
     <div class="page">
       <header class="section-head">
-        <h2>Locations<br>&amp; hours</h2>
-        <span class="caption">Two cafes in Peoria</span>
+        <h2>Location<br>&amp; hours</h2>
+        <span class="caption">East Peoria, IL</span>
       </header>
 
       <div class="locations">
@@ -684,16 +684,6 @@
           </div>
         </article>
 
-        <article class="location">
-          <h3>Coming soon<br>— stay tuned.</h3>
-          <dl>
-            <dt>Status</dt>
-            <dd>Scouting the next site.</dd>
-            <dt>Updates</dt>
-            <dd><a href="#rewards">Sign up for rewards</a> to hear first.</dd>
-          </dl>
-          <div class="status" style="color: var(--ink-60);"><span class="dot" style="background: var(--ink-40); box-shadow: 0 0 0 3px rgba(20,20,20,.08);" aria-hidden="true"></span>Not yet open</div>
-        </article>
       </div>
     </div>
   </section>

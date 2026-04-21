@@ -397,38 +397,59 @@
   }
 
   /* ---------- Locations ---------- */
-  .locations{
-    display: grid; gap: 3rem;
-    grid-template-columns: 1fr;
-  }
-  @media (min-width: 860px){
-    .locations{ grid-template-columns: minmax(0, 56rem); justify-content: start; gap: 4rem; }
-  }
+  .locations{ display: block; }
   .location{
     border-top: 1px solid var(--ink);
-    padding-top: 2.4rem;
+    padding-top: 3rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  @media (min-width: 900px){
+    .location{
+      grid-template-columns: minmax(24rem, 1fr) minmax(0, 2fr) auto;
+      gap: clamp(3rem, 5vw, 6rem);
+      align-items: start;
+    }
   }
   .location h3{
-    font-size: clamp(3rem, 4vw, 4.4rem);
-    margin-bottom: 2rem;
+    font-size: clamp(3.6rem, 5vw, 5.6rem);
+    margin: 0;
+    line-height: .95;
   }
   .location dl{
     display: grid;
-    grid-template-columns: auto 1fr;
-    gap: .8rem 2rem;
+    grid-template-columns: 1fr;
+    gap: 2rem clamp(2rem, 4vw, 4rem);
     margin: 0;
-    font-size: 1.3rem;
+    font-size: 1.45rem;
+  }
+  @media (min-width: 640px){
+    .location dl{ grid-template-columns: 1fr 1fr; }
+  }
+  .location dl > div{
+    display: grid;
+    gap: .4rem;
+    border-top: 1px solid var(--ink-15);
+    padding-top: 1.2rem;
   }
   .location dt{
     font-size: 1rem; letter-spacing: 0.28em; text-transform: uppercase;
     color: var(--ink-60);
-    padding-top: .2rem;
   }
-  .location dd{ margin: 0; }
+  .location dd{ margin: 0; line-height: 1.45; }
+  .location dd a:hover{ color: var(--accent); }
+  .location__aside{
+    display: flex; flex-direction: column; gap: 2rem;
+    align-items: flex-start;
+  }
+  @media (min-width: 900px){
+    .location__aside{ align-items: flex-end; text-align: right; }
+  }
   .location .status{
     display: inline-flex; align-items: center; gap: .8rem;
     font-size: 1.1rem; letter-spacing: 0.22em; text-transform: uppercase;
-    margin-top: 2rem;
+    margin: 0;
   }
   .dot{
     width: .8rem; height: .8rem; border-radius: 50%;
@@ -436,7 +457,7 @@
     box-shadow: 0 0 0 3px rgba(57,68,9,.2);
   }
   .location-actions{
-    display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2.4rem;
+    display: flex; gap: 1rem; flex-wrap: wrap; margin: 0;
   }
 
   /* ---------- Rewards ---------- */
@@ -666,21 +687,33 @@
 
       <div class="locations">
         <article class="location">
-          <h3>East Peoria<br>Levee District.</h3>
+          <h3>East Peoria<br>Levee District</h3>
+
           <dl>
-            <dt>Address</dt>
-            <dd><a href="https://maps.google.com/?q=409+Richland+Street,+East+Peoria,+IL+61611" target="_blank" rel="noreferrer">409 Richland Street<br>East Peoria, IL 61611</a></dd>
-            <dt>Phone</dt>
-            <dd><a href="tel:+13093000640">(309) 300-0640</a></dd>
-            <dt>Mon&ndash;Sat</dt>
-            <dd>6:45a &ndash; 5:00p</dd>
-            <dt>Sunday</dt>
-            <dd>7:45a &ndash; 2:00p</dd>
+            <div>
+              <dt>Address</dt>
+              <dd><a href="https://maps.google.com/?q=409+Richland+Street,+East+Peoria,+IL+61611" target="_blank" rel="noreferrer">409 Richland Street<br>East Peoria, IL 61611</a></dd>
+            </div>
+            <div>
+              <dt>Phone</dt>
+              <dd><a href="tel:+13093000640">(309) 300-0640</a></dd>
+            </div>
+            <div>
+              <dt>Mon&ndash;Sat</dt>
+              <dd>6:45a &ndash; 5:00p</dd>
+            </div>
+            <div>
+              <dt>Sunday</dt>
+              <dd>7:45a &ndash; 2:00p</dd>
+            </div>
           </dl>
-          <div class="status"><span class="dot" aria-hidden="true"></span>Open today &middot; closes 5pm</div>
-          <div class="location-actions">
-            <a class="btn" href="https://www.toasttab.com/reverence-coffee-east-peoria" target="_blank" rel="noreferrer">Order pickup</a>
-            <a class="btn btn--ghost" href="https://maps.google.com/?q=409+Richland+Street,+East+Peoria,+IL+61611" target="_blank" rel="noreferrer">Directions</a>
+
+          <div class="location__aside">
+            <div class="status"><span class="dot" aria-hidden="true"></span>Open today &middot; closes 5pm</div>
+            <div class="location-actions">
+              <a class="btn" href="https://www.toasttab.com/reverence-coffee-east-peoria" target="_blank" rel="noreferrer">Order pickup</a>
+              <a class="btn btn--ghost" href="https://maps.google.com/?q=409+Richland+Street,+East+Peoria,+IL+61611" target="_blank" rel="noreferrer">Directions</a>
+            </div>
           </div>
         </article>
 
